@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  box-sizing: border-box;
+  margin: 0rem;
+  padding: 0rem;
+}
+
+body{
+  @apply bg-neutral1;
+}
+
+h1, h2, h3, h5, p{
+  @apply text-neutral5;
+}
+
+h1{
+  @apply text-3xl;
+}
+
+h2{
+  @apply text-2xl;
+}
+
+input{
+margin: 1rem;
+}
+
+.spriteTest{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightblue;
+}
+
+.allAppButtons{
+  height: 2.75rem;
+  @apply 
+    text-neutral5
+    bg-neutral2
+    rounded-md;
+}
+
+.allAppButtons:hover{
+  @apply 
+    border-neutral5
+    border-solid
+    border-2;
+}
+
+/* Header styles */
+
+.headerContainer{
+  height: 4rem;
+  width: 100%;
+  padding: 0.75rem;
+  align-items: center;
+  @apply 
+    bg-primary3
+    text-neutral1;
+}
+
+.navButton{
+  margin-right: 1rem;
+  height: 2rem;
+  width: 8rem;
+  text-align: center;
+  @apply text-neutral1;
+}
+
+.navButton:hover{
+  @apply 
+    border-primary2 
+    border-solid 
+    border-2
+    rounded-lg;
+}
+
+.flexMeRow{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flexMeColumn{
+  display: flex;
+  flex-direction: column;
+}
+
+/* pokemon selectors */
+
+.preGameContainer{
+  max-width: 28rem;
+  min-height: 40rem;
+  margin: auto;
+  text-align: center;
+}
+
+.selectorDirectionsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 15rem;
+  margin-top: 1.8rem;
+}
+
+.surpriseMeButton{
+  width: 12.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.catchEmButton{
+  width: 12.5rem;
+  margin-bottom: 1rem;
+}
+
+.pokemonSelectorsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 18rem;
+}
+
+.pmonSelectorForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.pmonSelectorInputField{
+  padding-left: 1rem;
+  width: 16rem;
+}
+
+.errorMessage{
+  @apply text-error4;
+}
+
+.duringPlayButtons{
+  margin-top: 1rem;
+  border: 2px solid rgb(0,0,0,0)
+}
+
+/* card styling */
+
+.setCard{
+  border-radius: 10px;
+  height: 6.875rem;
+  width: 13.75rem;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: .3rem .3rem .3rem .3rem;
+}
+
+.cardBack0{
+  @apply bg-success1;
+}
+
+.cardBack1{
+  @apply bg-primary1;
+}
+
+.cardBack2{
+  @apply bg-warning1;
+}
+
+.cardBorder0{
+  @apply 
+    border-dotted 
+    border-4 
+    border-primary3;
+}
+
+.cardBorder1{
+  @apply 
+    border-solid 
+    border-4 
+    border-error3;
+}
+
+.cardBorder2{
+  border: none;
+}
+
+/*Note 64x64 is default size, changing it will result in poor quality*/
+.pmonSprite{
+  height: 64px;
+  width: 64px;
+}
+
+.pmonSpriteTiny{
+  height: 32px;
+  width: 32px;
+  margin-right: .3rem;
+}
+
+/* gameboard containers */
+
+.gameAreaContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2rem;
+}
+
+.gameDetailsContainer{
+  justify-content: space-evenly;
+  height: 40rem;
+  width: 16rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  @apply
+    border-solid
+    border-2
+    border-neutral5
+    rounded-md;
+}
+
+.thisGamePmonInfo{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: .25rem;
+}
+
+.gameBoardContainer{
+  height: 34.375rem;
+  width: 37.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+/* these are the spots on the board where cards will be placed
+This does not include styling for the card itself. */
+.cardSlot{
+border-radius: 5px;
+height: 7.5rem;
+width: 14.375rem;
+margin: .3rem .3rem .3rem .3rem;
+}
+
+.cardSlot:hover{
+  @apply bg-neutral3;
+}
+
+.cardSlotSelected{
+  border-radius: 5px;
+  height: 7.5rem;
+  width: 14.375rem;
+  margin: .3rem .3rem .3rem .3rem;
+  @apply bg-neutral4;
+}
