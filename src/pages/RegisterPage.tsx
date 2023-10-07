@@ -49,15 +49,26 @@ export default function RegisterPage(){
     
   return (
     <>
-        <div>Register Here</div>
-        <form onSubmit={handleRegisterForm}>
+        <div style={{width: '35rem', margin:'auto', paddingTop:'5rem'}}>
+            Skip this for now. 
+            <br/>
+            <br />
+            Just head to <strong>Play Pokeset</strong> in the nav bar. 
+            <br />
+            <br />
+            This registration form connects to a free backend 
+            hosting solution that is technically functional 
+            but very slow, since I didn't want to upgrade to paid hosting tier. Check back later for full functionality.
+            Submit button is deactivated for now to avoid spamming the auth table in SQL.
+            </div>
+        <form style={{width: '35rem', margin:'auto'}} onSubmit={handleRegisterForm}>
             <input type="text" placeholder="Username" ref={usernameField}/>
             <br /><br />
             <input type="email" placeholder="Email" ref={emailField}/>
             <br /><br />
             <input type="password" placeholder="Password" ref={passwordField}/>
             <br /><br />
-            <button>Register</button>
+            {/*<button style={{width:'12rem'}}className="allAppButtons">Register</button>*/}
         </form>
     </>
   )

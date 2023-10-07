@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import CardSlot from "./CardSlot"
 import MakeDeck from './TheDeck'
-import { useNavigate } from "react-router-dom"
+//import { useNavigate } from "react-router-dom"
 import { checkForSets } from "../utils/generalFunctions"
 
 export type Card = {
@@ -23,10 +23,10 @@ const standardBoardSize = 12
 
 export default function GameBoard({imgUrls, setIsPlaying, pmonNameList}:Props) {
 
-    const navigate = useNavigate()
-    
-
-    const base_api_url = import.meta.env.VITE_APP_BASE_API
+    // these are for handling game submission - commented out for 
+    // interim vite post
+    //const navigate = useNavigate()
+    //const base_api_url = import.meta.env.VITE_APP_BASE_API
 
     // use state to show status of selections, maybe?
     const [foundSetStatus, setFoundSetStatus] = useState<string>('Awaiting game start')
@@ -207,25 +207,25 @@ export default function GameBoard({imgUrls, setIsPlaying, pmonNameList}:Props) {
     // for now, this is just triggering the use effect to stop playing,
     // submit your score to the backend, and take you to the scores 
     // summary page...gotta figure out type of e on button click here...
-    async function handleSubmitGame(e:React.MouseEvent<HTMLButtonElement>){
-        e.preventDefault()
-        const res = await fetch(`${base_api_url}/newScore`,{
-            method:'POST',
-            headers : {
-                'Content-Type' : 'application/json',
-            },
-            body:JSON.stringify({
-                user_id: 3,
-                username: 'react1',
-                sets_found:setsFound
-            })
-        })
-        if(res.ok){
-            const data = await res.json()
-            console.log(data)
-            navigate(`/highscores`)
-        }
-    }
+    // async function handleSubmitGame(e:React.MouseEvent<HTMLButtonElement>){
+    //     e.preventDefault()
+    //     const res = await fetch(`${base_api_url}/newScore`,{
+    //         method:'POST',
+    //         headers : {
+    //             'Content-Type' : 'application/json',
+    //         },
+    //         body:JSON.stringify({
+    //             user_id: 3,
+    //             username: 'react1',
+    //             sets_found:setsFound
+    //         })
+    //     })
+    //     if(res.ok){
+    //         const data = await res.json()
+    //         console.log(data)
+    //         navigate(`/highscores`)
+    //     }
+    // }
 
     // this re-renders gameboard by altering the state
     function handleStartOver(){
@@ -237,6 +237,7 @@ export default function GameBoard({imgUrls, setIsPlaying, pmonNameList}:Props) {
     <div className="gameAreaContainer">
         <div className="gameDetailsContainer flexMeColumn">
             <button className="allAppButtons duringPlayButtons" onClick={handleStartOver}>Start Over</button>
+            <h3><strong>{foundSetStatus}</strong></h3>
             <h3>You're playing with:
                 <span className="thisGamePmonInfo">
                     <img className="pmonSpriteTiny" src={`${imgUrls[0]}`} alt="" /> 
@@ -261,11 +262,10 @@ export default function GameBoard({imgUrls, setIsPlaying, pmonNameList}:Props) {
             <h3>{`Penalty set checks: ${penaltyChecksUsed}`}</h3>
             <button className="allAppButtons duringPlayButtons" onClick={handleExtraRow}>Deal Extra Row</button>
             <h3>{`Extra row penalties: ${addRowPenalty}`}</h3>
-            <br/>
-            <button className="allAppButtons duringPlayButtons" onClick={handleSubmitGame}>Submit Game</button>
-            <h3>{foundSetStatus}</h3>
-            <h3>Sets Found: {setsFound}</h3>
-            <h3>{`Total Score: ${setsFound - penaltyChecksUsed - (addRowPenalty*0.5)}`}</h3>
+            {/* <button className="allAppButtons duringPlayButtons" onClick={handleSubmitGame}>Submit Game</button> */}
+            
+            <h3><strong>Sets Found: {setsFound}</strong></h3>
+            <h3><strong>{`Total Score: ${setsFound - penaltyChecksUsed - (addRowPenalty*0.5)}`}</strong></h3>
         </div>
         <div className="gameBoardContainer">
             { boardCards.map(eachCard => (
