@@ -7,7 +7,7 @@ export default function RulesPage() {
       <br /> 
       In the mean time: 
       <br />
-      Rules are the same as the class Set card game.
+      Rules are the same as the classic Set card game.
       <br />
       <br />
       Each card has 4 characteristics: 

@@ -127,7 +127,7 @@ export default function GameBoard({imgUrls, setIsPlaying, pmonNameList}:Props) {
             }
         // update message states if there's 2 cards in the array
         }else if(userSelections.length === 2 || userSelections.length === 1){
-            setFoundSetStatus('Player is choosing cards...')
+            setFoundSetStatus('Player choosing cards...')
         }
         // otherwise the array is empty and we do nothing.
     },[userSelections])
