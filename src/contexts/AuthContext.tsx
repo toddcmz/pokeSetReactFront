@@ -17,7 +17,7 @@ export const AuthContext = createContext<UserContext>({} as UserContext)
 
 export function AuthProvider({ children }:{children: JSX.Element | JSX.Element[]}){
 
-    const [user, setUser] = useState<User>({username:"", token:"", loggedIn:false})
+    const [user, setUser] = useState<User>({username:"anonymous", token:"", loggedIn:false})
 
     const value = {
         user,

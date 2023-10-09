@@ -11,6 +11,10 @@ export default function Header(){
             <div className="pageTitle"> 
                 <NavLink to='/'>Pokeset</NavLink>
             </div>
+            <div className="playingAsContainer">
+                <h3>Currently Playing As:</h3>
+                <h3>{user.username}</h3>
+            </div>
             <div className="navButtonContainer flexMeRow">
                 <div className="navButton">
                     <NavLink to='/register'>Register</NavLink>
@@ -27,9 +31,9 @@ export default function Header(){
                 <div className="navButton">
                     <NavLink to='/highscores'>High Scores</NavLink>
                 </div>
-                {/* <div className="navButton">
+                <div className="navButton">
                     <NavLink to='/logout'>Log Out</NavLink>
-                    </div> */}
+                </div>
             </div>
         </header>
     )

@@ -24,8 +24,10 @@ h2{
   @apply text-2xl;
 }
 
-input{
-margin: 1rem;
+i{
+  @apply 
+    text-sm
+    text-error4;
 }
 
 .spriteTest{
@@ -54,19 +56,37 @@ margin: 1rem;
 .headerContainer{
   height: 4rem;
   width: 100%;
-  padding: 0.75rem;
   align-items: center;
   @apply 
     bg-primary3
     text-neutral1;
 }
 
-.navButton{
-  margin-right: 1rem;
-  height: 2rem;
-  width: 8rem;
+.pageTitle{
+  margin-left: 0.75rem;
+  padding: 0.25rem .5rem .25rem .5rem;
   text-align: center;
-  @apply text-neutral1;
+  @apply 
+    text-neutral1
+    border-primary3
+    border-2
+    border-solid;
+}
+
+.playingAsContainer > h3{
+  text-align: center;
+  @apply text-primary1;
+}
+
+.navButton{
+  margin-right: 0.5rem;
+  padding: 0.25rem .75rem .25rem .75rem;
+  text-align: center;
+  @apply 
+    text-neutral1
+    border-primary3
+    border-2
+    border-solid;
 }
 
 .navButton:hover{
@@ -86,6 +106,45 @@ margin: 1rem;
 .flexMeColumn{
   display: flex;
   flex-direction: column;
+}
+
+/* Registration Form */
+.registerForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.registerFormField{
+  width: 16rem;
+  height: 2.5rem;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-radius: 6px;
+  @apply
+    border-solid
+    border-2
+    border-neutral1;
+}
+
+.registerFormField:focus{
+  @apply 
+    outline-none
+    border-solid
+    border-2
+    border-neutral5;
+}
+
+.registerFormSubmitButton{
+margin: 1.5rem auto;
+}
+
+.inputErrorContainer{
+  height: 1.5rem;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 /* pokemon selectors */
