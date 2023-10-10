@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 
 import GameBoard from "./GameBoard"
 import allPokemonList from "../utils/allPokemonList.json"
@@ -6,16 +6,16 @@ import { getRandomPmon } from "../utils/generalFunctions"
 
 export default function ChoosePokemon() {
 
-    const [pmonImages, setPmonImages] = useState<string[]>([])
-
     // boolean state for conditional rendering: choose pokemon or gameboard stuff
     const [isPlaying, setIsPlaying] = useState<Boolean>(false)
-    const [pmonNameList, setPmonNameList] = useState<string[]>([])
     const [inputErrorMessage, setInputErrorMessage] = useState("")
 
-    const pmon1Field = useRef<HTMLInputElement>(null)
-    const pmon2Field = useRef<HTMLInputElement>(null)
-    const pmon3Field = useRef<HTMLInputElement>(null)
+    const [pmon1Field, setPmon1Field] = useState('')
+    const [pmon2Field, setPmon2Field] = useState('')
+    const [pmon3Field, setPmon3Field] = useState('')
+
+    const [pmonNameList, setPmonNameList] = useState<string[]>([])
+    const [pmonImages, setPmonImages] = useState<string[]>([])
 
     async function handleChoosePokemonForm(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault()
@@ -24,9 +24,9 @@ export default function ChoosePokemon() {
         // for the api, which requires all lower case to work. this will allow user
         // to type whatever casing they want.
 
-        let pmon1Name = pmon1Field.current?.value.toLowerCase() || ""
-        let pmon2Name = pmon2Field.current?.value.toLowerCase() || ""
-        let pmon3Name = pmon3Field.current?.value.toLowerCase() || ""
+        let pmon1Name = pmon1Field.toLowerCase()
+        let pmon2Name = pmon2Field.toLowerCase()
+        let pmon3Name = pmon3Field.toLowerCase()
 
         // check for duplicated entries and disallow - but only if not blanks
         // as duplicates
@@ -124,13 +124,31 @@ export default function ChoosePokemon() {
                 <div className="pokemonSelectorsContainer">
                 <form className="pmonSelectorForm" onSubmit={handleChoosePokemonForm}>
                     <span>
-                        <input className="pmonSelectorInputField" type="text" placeholder="Pokemon 1" ref={pmon1Field}/>
+                        <input 
+                            className="pmonSelectorInputField" 
+                            type="text" 
+                            placeholder="Pokemon 1" 
+                            onChange={(e) => setPmon1Field(e.target.value)}
+                            value={pmon1Field}
+                        />
                     </span>
                     <span>
-                        <input className="pmonSelectorInputField" type="text" placeholder="Pokemon 2" ref={pmon2Field}/>
+                        <input 
+                            className="pmonSelectorInputField" 
+                            type="text" 
+                            placeholder="Pokemon 2" 
+                            onChange={(e) => setPmon2Field(e.target.value)}
+                            value={pmon2Field}
+                        />
                     </span>
                     <span>
-                        <input className="pmonSelectorInputField" type="text" placeholder="Pokemon 3" ref={pmon3Field}/>
+                        <input 
+                            className="pmonSelectorInputField" 
+                            type="text" 
+                            placeholder="Pokemon 3" 
+                            onChange={(e) => setPmon3Field(e.target.value)}
+                            value={pmon3Field}
+                        />
                     </span>
                     <span>
                         <button className="catchEmButton pmonSelectorButtons allAppButtons">Catch 'em!</button>
