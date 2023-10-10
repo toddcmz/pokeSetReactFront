@@ -1,7 +1,27 @@
+import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../contexts/AuthContext"
+import { useContext } from 'react'
 
+export default function Logout() {
 
-export default function logout() {
+  const navigate = useNavigate()
+  const {user, setUser} = useContext(AuthContext)
+
+  function handleLogout(){
+    // reset auth context info
+    if(user){
+      setUser({
+        username:"anonymous",
+        token:"",
+        loggedIn: false
+      })
+      // reset cookie info
+      localStorage.clear()
+      navigate('/')
+    }
+  }
+
   return (
-    <div>logout</div>
+    <div onClick={handleLogout}>Logout</div>
   )
 }

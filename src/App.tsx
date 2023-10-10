@@ -6,6 +6,7 @@ import SignInPage from "./pages/SignInPage"
 import PlayGamePage from "./pages/PlayGamePage"
 import RulesPage from "./pages/RulesPage"
 import HighScoresPage from "./pages/HighScoresPage"
+import RegisterSuccessPage from "./pages/RegisterSuccessPage"
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path='/' element = { <LandingPage /> } />
             <Route path='/register' element = { <RegisterPage /> } />
+            <Route path='/registerSuccessPage' element = { <RegisterSuccessPage /> } />
             <Route path='/signin' element = { <SignInPage /> } />
             <Route path='/play' element = { <PlayGamePage /> } />
             <Route path='/rules' element = { <RulesPage /> } />

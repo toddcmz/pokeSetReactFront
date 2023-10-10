@@ -1,11 +1,8 @@
-import { useState, useContext, useEffect } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { AuthContext } from "../contexts/AuthContext"
-
 
 export default function RegisterForm(){
 
-  const {user, setUser} = useContext(AuthContext)
   const navigate = useNavigate()
   const base_api_url = import.meta.env.VITE_APP_BASE_API
 
@@ -20,13 +17,6 @@ export default function RegisterForm(){
   const[usernameError, setUsernameError] = useState('')
   const[emailError, setEmailError] = useState('')
   const[passwordError, setPasswordError] = useState('')
-
-  useEffect(()=>{
-    if(user.token){
-      localStorage.setItem('token', JSON.stringify(user.token))
-      localStorage.setItem('username', JSON.stringify(user.username))
-    }
-  },[user])
 
   async function handleRegisterForm(e:React.FormEvent<HTMLFormElement>){
     e.preventDefault()
@@ -57,28 +47,29 @@ export default function RegisterForm(){
         })
     })
 
+    const data = await res.json()
+
     if(res.ok){
-      const data = await res.json()
-      if(data[0].message === `${usernameField} registered`){
-        setUser({
-          username:usernameField,
-          token:data[0].token,
-          loggedIn:true
-        })
-        navigate('/')
-      }else if(data[0].message === "An account with this username already exists, try again."){
+        navigate('/registerSuccessPage')
+    }else{
+      if(data.error === "duplicateUser"){
         console.log('username error triggered')
         setUsernameError("This username is already taken.")
         setRegisterSubmitted(false)
         setUsernameField("")
         return
-      }else if(data[0].message === "An account with this email already exists, try again."){
+      }
+      if(data.error === "duplicateEmail"){
         setEmailError("An account with this email already exists.")
         setRegisterSubmitted(false)
         setEmailField("")
         return
       }
+      // this should only happen if the res is not ok, and neither of my two
+      // specifically handled errors happened
+      console.log("some other error occurred during registration")
     }
+
   }
     
   return (
@@ -144,7 +135,6 @@ export default function RegisterForm(){
       </label>
       <button 
         className = "registerFormSubmitButton allAppButtons" 
-        style={{width:'12rem'}} 
         disabled = {registerSubmitted}
       >
         {!registerSubmitted && <p>Register</p> }

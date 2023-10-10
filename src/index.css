@@ -97,6 +97,10 @@ i{
     rounded-lg;
 }
 
+.logoutButton:hover{
+  cursor: pointer;
+}
+
 .flexMeRow{
   display: flex;
   flex-direction: row;
@@ -108,8 +112,9 @@ i{
   flex-direction: column;
 }
 
-/* Registration Form */
-.registerForm{
+/* Registration and Sign in Forms */
+
+.registerForm, .signInForm{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -117,7 +122,7 @@ i{
   width: fit-content;
 }
 
-.registerFormField{
+.registerFormField, .signInFormField{
   width: 16rem;
   height: 2.5rem;
   margin-top: 1rem;
@@ -129,7 +134,11 @@ i{
     border-neutral1;
 }
 
-.registerFormField:focus{
+.signInFormField{
+  margin-bottom: 1.5rem;
+}
+
+.registerFormField:focus, .signInFormField:focus{
   @apply 
     outline-none
     border-solid
@@ -137,11 +146,14 @@ i{
     border-neutral5;
 }
 
-.registerFormSubmitButton{
+.registerFormSubmitButton, .signInFormSubmitButton{
 margin: 1.5rem auto;
+width: 12rem;
 }
 
-.inputErrorContainer{
+
+
+.inputErrorContainer, .signInErrorContainer{
   height: 1.5rem;
   width: fit-content;
   margin: 0 auto;
