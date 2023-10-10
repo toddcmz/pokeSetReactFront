@@ -53,7 +53,6 @@ export default function SignInForm(){
       console.log("signed in ok", data)
       navigate('/')
     }else{
-      console.log('should be error', data)
       setCredentialsError("Invalid credentials, try again.")
       setSignInClicked(false)
       return

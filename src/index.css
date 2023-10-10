@@ -331,3 +331,13 @@ margin: .3rem .3rem .3rem .3rem;
   margin: .3rem .3rem .3rem .3rem;
   @apply bg-neutral4;
 }
+
+/* Game summary page */
+.gameSummaryContainer{
+  width: 20rem;
+  height: 35rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

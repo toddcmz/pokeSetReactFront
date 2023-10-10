@@ -3,11 +3,12 @@ import { useState } from "react"
 import GameBoard from "./GameBoard"
 import allPokemonList from "../utils/allPokemonList.json"
 import { getRandomPmon } from "../utils/generalFunctions"
+import GameSummary from "./GameSummary"
 
 export default function ChoosePokemon() {
 
   // boolean state for conditional rendering: choose pokemon or gameboard stuff
-  const [isPlaying, setIsPlaying] = useState<Boolean>(false)
+  const [gameStatus, setGameStatus] = useState<string>("choosing")
   const [inputErrorMessage, setInputErrorMessage] = useState("")
 
   const [pmon1Field, setPmon1Field] = useState('')
@@ -16,6 +17,11 @@ export default function ChoosePokemon() {
 
   const [pmonNameList, setPmonNameList] = useState<string[]>([])
   const [pmonImages, setPmonImages] = useState<string[]>([])
+
+  // scoring related state:
+  const [penaltyChecksUsed, setPenaltyChecksUsed] = useState(0)
+  const [addRowPenalty, setAddRowPenalty] = useState(0)
+  const [setsFound, setSetsFound] = useState(0)
 
   async function handleChoosePokemonForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -107,12 +113,12 @@ export default function ChoosePokemon() {
       let imageSourceUrl3: string = data['sprites']['versions']['generation-iii']['emerald']['front_default']
       setPmonImages(pmonImages => [...pmonImages, imageSourceUrl3])
     }
-    setIsPlaying(true)
+    setGameStatus("playing")
   }
 
   return (
     <>
-      {!isPlaying &&
+      {gameStatus === "choosing" &&
         <>
           <div className="preGameContainer">
             <div className="selectorDirectionsContainer">
@@ -160,8 +166,23 @@ export default function ChoosePokemon() {
           </div>
         </>
       }
-      {isPlaying &&
-        <GameBoard imgUrls={pmonImages} setIsPlaying={setIsPlaying} pmonNameList={pmonNameList} />
+      {gameStatus === "playing" &&
+        <GameBoard 
+          imgUrls={pmonImages} 
+          setGameStatus={setGameStatus} 
+          pmonNameList={pmonNameList}
+          penaltyChecksUsed={penaltyChecksUsed} setPenaltyChecksUsed={setPenaltyChecksUsed}
+          addRowPenalty={addRowPenalty} setAddRowPenalty={setAddRowPenalty}
+          setsFound={setsFound} setSetsFound={setSetsFound}
+        />
+      }
+      {gameStatus === "summary" &&
+        <GameSummary 
+          setGameStatus={setGameStatus}
+          penaltyChecksUsed={penaltyChecksUsed}
+          addRowPenalty={addRowPenalty} 
+          setsFound={setsFound} 
+        />
       }
     </>
   )

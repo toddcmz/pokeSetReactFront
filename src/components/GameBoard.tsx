@@ -15,63 +15,56 @@ export type Card = {
 // for sending to gameboard
 type Props = {
   imgUrls: string[]
-  setIsPlaying: (bool: boolean) => void
+  setGameStatus: (str: string) => void
   pmonNameList: string[]
+  penaltyChecksUsed: number
+  setPenaltyChecksUsed: (num: number) => void
+  addRowPenalty: number
+  setAddRowPenalty: (num: number) => void
+  setsFound: number
+  setSetsFound: (num: number) => void
 }
 
 const standardBoardSize = 12
 
-export default function GameBoard({ imgUrls, setIsPlaying, pmonNameList }: Props) {
+export default function GameBoard({ 
+  imgUrls, setGameStatus, pmonNameList,
+  penaltyChecksUsed, setPenaltyChecksUsed,
+  addRowPenalty, setAddRowPenalty,
+  setsFound, setSetsFound }: Props) {
 
   // these are for handling game submission - commented out for 
   // interim vite post
   //const navigate = useNavigate()
   //const base_api_url = import.meta.env.VITE_APP_BASE_API
 
-  // use state to show status of selections, maybe?
+  // use state to show status of selections
   const [foundSetStatus, setFoundSetStatus] = useState<string>('Awaiting game start')
 
   // this will hold the cards the user clicks on while playing
   const [userSelections, setUserSelections] = useState<Card[]>([])
 
-  //keep track of total sets found this game
-  const [setsFound, setSetsFound] = useState(0)
-
   // make the original game deck, this is constructed in TheDeck component
-  // Dane says just delete second arg. look up leave or delete comma as well
   const [deckCards, setDeckCards] = useState<Card[]>(MakeDeck())
 
-  //this controls how many extra rows can be added and is mostly proof of concept
+  //this controls how many extra rows can be added
   const [extraRow, setExtraRow] = useState(0)
 
   // make the initial game board, first 12 cards of the game deck.
-  // what I want is to remove those cards from the deck, preferrably
-  // the final 12 cards, actually, but react documentation is telling me not to mutate
-  // things like that. Maybe I can figure out how to use some sort of
-  // "where in the deck are we" pointer? I suppose I could just pull a random
-  // card for now. It would be nice to figure out the pointer, though.
+  // gets updated with deck pointer as game progresses
   const [boardCards, setBoardCards] = useState<Card[]>(deckCards.slice(0, standardBoardSize))
 
-  // so, let's try the pointer method for the deck to figure out where we are.
-  // we could add logic down the line to generate a new deck and a new board
-  // if we reach the end of the deck, probably within the useEffect. Starts
-  // at twelve out of the gate, the index of the next card in the shuffled
-  // starting deck to deal out.
+  // keeps track of where in the deck to deal cards from.
+  // starts at value of 12, standard board size
   const [deckPointer, setDeckPointer] = useState(standardBoardSize)
 
   // for tracking how many sets were found, and penalties for checking
   // for sets too often or adding rows when sets are available.
   const [setsPresent, setSetsPresent] = useState<string>("unclicked")
   const [freebiesUsed, setFreebiesUsed] = useState(0)
-  const [penaltyChecksUsed, setPenaltyChecksUsed] = useState(0)
-  const [addRowPenalty, setAddRowPenalty] = useState(0)
 
-  //useEffect to trigger updates to the top 4 states listed above when
-  // the userSelections state array has 3 cards in it. if it has 0
-  // or 1 card in it, we just update the status states associated with
-  // giving the user info about what's going on in the game. If length
-  // is 3, then we're going to run our set checks and update things
-  // accordingly.
+  //useEffect to trigger updates to several state objects when
+  // the userSelections state array has 0, 1, 2, or 3 cards.
   useEffect(() => {
     // this is the "check if a set case"
     if (userSelections.length === 3) {
@@ -117,8 +110,7 @@ export default function GameBoard({ imgUrls, setIsPlaying, pmonNameList }: Props
               card.cardId !== userSelections[1].cardId
               &&
               card.cardId !== userSelections[2].cardId
-          )
-          )
+          ))
         }
         // otherwise not a valid set
       } else {
@@ -127,7 +119,7 @@ export default function GameBoard({ imgUrls, setIsPlaying, pmonNameList }: Props
       }
       // update message states if there's 2 cards in the array
     } else if (userSelections.length === 2 || userSelections.length === 1) {
-      setFoundSetStatus('Player choosing cards...')
+      setFoundSetStatus('Player is choosing cards')
     }
     // otherwise the array is empty and we do nothing.
   }, [userSelections])
@@ -151,13 +143,10 @@ export default function GameBoard({ imgUrls, setIsPlaying, pmonNameList }: Props
     }
   }, [extraRow])
 
-  // I could probably add a useEffect if this works to check the deck pointer and 
-  // generate a newly shuffled deck. This could be useful. This basically resets
-  // the board. it would be nice to flash a message that the deck was reshuffled 
-  // when this happens. A lot of things have to be reset for this to work, I believe.
-  // was getting warning child with duplicate key cropping up after impleenting this.
-  // dont' know for sure that wasn't happening previously. 76 was picked just because
-  // it's near the end of the deck, but not the VERY end.
+  // When we get near the end of the deck, reshuffle and deal a new board.
+  // 76 was chosen arbitrarily - near end but will trigger before trying to
+  // deal cards beyond the size of the deck. 
+  // In timed games, this should almost never need to trigger.
   useEffect(() => {
     if (deckPointer > 76) {
       setDeckCards(MakeDeck())
@@ -165,7 +154,7 @@ export default function GameBoard({ imgUrls, setIsPlaying, pmonNameList }: Props
       setDeckPointer(standardBoardSize)
       setUserSelections([])
       setExtraRow(0)
-      console.log('reshuffle triggered, made new deck and board')
+      setFoundSetStatus("Reshuffled empty deck!")
     }
   }, [deckPointer])
 
@@ -193,43 +182,23 @@ export default function GameBoard({ imgUrls, setIsPlaying, pmonNameList }: Props
     }
   }
 
-  // this just forces the state of extra row to change every time the button is clicked.
-  // you only get an extra row if you don't already have one, logic taken care of in
-  // the useEffect that has extraRow in its dependency array. Actual value of extra
-  // row doesn't matter, but it is something that could be tracked and
-  // included in the user score, which could be cool.
+  // this just forces the state of extra row to change every time 
+  // the button is clicked and handles associated logic.
   function handleExtraRow(): void {
     setExtraRow(extraRow + 1)
     // stop displaying extra sets count if another row is added
     setSetsPresent("unclicked")
   }
 
-  // for now, this is just triggering the use effect to stop playing,
-  // submit your score to the backend, and take you to the scores 
-  // summary page...gotta figure out type of e on button click here...
-  // async function handleSubmitGame(e:React.MouseEvent<HTMLButtonElement>){
-  //     e.preventDefault()
-  //     const res = await fetch(`${base_api_url}/newScore`,{
-  //         method:'POST',
-  //         headers : {
-  //             'Content-Type' : 'application/json',
-  //         },
-  //         body:JSON.stringify({
-  //             user_id: 3,
-  //             username: 'react1',
-  //             sets_found:setsFound
-  //         })
-  //     })
-  //     if(res.ok){
-  //         const data = await res.json()
-  //         console.log(data)
-  //         navigate(`/highscores`)
-  //     }
-  // }
+  // handles clicking end early button. sends to game summary
+  // also gets called when the game timer runs out
+  async function handleEndGame(){
+    setGameStatus("summary")
+  }
 
   // this re-renders gameboard by altering the state
   function handleStartOver() {
-    setIsPlaying(false)
+    setGameStatus("choosing")
   }
 
   return (
@@ -266,6 +235,7 @@ export default function GameBoard({ imgUrls, setIsPlaying, pmonNameList }: Props
 
           <h3><strong>Sets Found: {setsFound}</strong></h3>
           <h3><strong>{`Total Score: ${setsFound - penaltyChecksUsed - (addRowPenalty * 0.5)}`}</strong></h3>
+          <button className="allAppButtons duringPlayButtons" onClick={handleEndGame}>End Game Now</button>
         </div>
         <div className="gameBoardContainer">
           {boardCards.map(eachCard => (
