@@ -47,7 +47,7 @@ export default function GameSummary({setGameStatus,
 
     if(res.ok){
       console.log(data)
-      navigate("/highScoreSubmissionPage")
+      navigate("/scoreSubmissionPage")
     }else{
       console.log("error in res from within font end game summary")
     }

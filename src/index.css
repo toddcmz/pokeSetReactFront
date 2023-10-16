@@ -12,7 +12,7 @@ body{
   @apply bg-neutral1;
 }
 
-h1, h2, h3, h5, p{
+h1, h2, h3, h5, p, tr{
   @apply text-neutral5;
 }
 
@@ -341,3 +341,30 @@ margin: .3rem .3rem .3rem .3rem;
   flex-direction: column;
   justify-content: space-evenly;
 }
+
+/* High Scores Page */
+.scoresContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: auto;
+  width: 25rem;
+}
+
+.allScoresContainer, .userScoresContainer{
+  width: 50%;
+}
+
+table{
+  table-layout: fixed;
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tableScore{
+  text-align: right;
+}
+
