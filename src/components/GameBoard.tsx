@@ -74,7 +74,6 @@ export default function GameBoard({
       let spriteSet = [...new Set([userSelections[0].cardPmonImgUrl, userSelections[1].cardPmonImgUrl, userSelections[2].cardPmonImgUrl])]
       // do the comparisons to determine valid set based on above 4 objects lengths, just none of them can be of length 2.
       if (borderSet.length !== 2 && backgroundSet.length !== 2 && pokeNumSet.length !== 2 && spriteSet.length !== 2) {
-        console.log(deckPointer)
         setFoundSetStatus("Yay! That's a valid set!")
         setSetsFound(setsFound + 1)
         setUserSelections([])
@@ -198,6 +197,11 @@ export default function GameBoard({
 
   // this re-renders gameboard by altering the state
   function handleStartOver() {
+    // since these are initiated in chooseAndPlay, must reset them
+    // otherwise they retain their values from the end of last game
+    setPenaltyChecksUsed(0)
+    setAddRowPenalty(0)
+    setSetsFound(0)
     setGameStatus("choosing")
   }
 

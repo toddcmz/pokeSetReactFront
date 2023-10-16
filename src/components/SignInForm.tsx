@@ -36,10 +36,10 @@ export default function SignInForm(){
       headers:{
         'Content-Type' : 'application/json'
       },
-        body: JSON.stringify({
-          username: usernameField,
-          password: passwordField
-        })
+      body: JSON.stringify({
+        username: usernameField,
+        password: passwordField
+      })
     })
 
     const data = await res.json()

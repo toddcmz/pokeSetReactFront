@@ -7,6 +7,7 @@ import PlayGamePage from "./pages/PlayGamePage"
 import RulesPage from "./pages/RulesPage"
 import HighScoresPage from "./pages/HighScoresPage"
 import RegisterSuccessPage from "./pages/RegisterSuccessPage"
+import ScoreSubmissionPage from "./pages/ScoreSubmissionPage"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path='/play' element = { <PlayGamePage /> } />
             <Route path='/rules' element = { <RulesPage /> } />
             <Route path='/highscores' element = { <HighScoresPage /> } />
+            <Route path='/scoreSubmissionPage' element = { <ScoreSubmissionPage /> } />
             <Route path='*' element = { <Navigate to='/' />} />
           </Routes>
       </BrowserRouter>  

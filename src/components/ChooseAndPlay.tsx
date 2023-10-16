@@ -180,8 +180,11 @@ export default function ChoosePokemon() {
         <GameSummary 
           setGameStatus={setGameStatus}
           penaltyChecksUsed={penaltyChecksUsed}
+          setPenaltyChecksUsed={setPenaltyChecksUsed}
           addRowPenalty={addRowPenalty} 
+          setAddRowPenalty={setAddRowPenalty}
           setsFound={setsFound} 
+          setSetsFound={setSetsFound}
         />
       }
     </>
