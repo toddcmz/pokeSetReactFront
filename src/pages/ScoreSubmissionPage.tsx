@@ -14,6 +14,6 @@ export default function ScoreSubmissionPage() {
   },[])
   
   return (
-    <div style={{width:'20rem', margin:'auto'}}>Submitting your score...</div>
+    <div style={{width:'20rem', margin:'3rem auto'}}>Submitting your score...</div>
   )
 }

@@ -185,6 +185,7 @@ width: 12rem;
 
 .catchEmButton{
   width: 12.5rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -206,8 +207,23 @@ width: 12rem;
 }
 
 .pmonSelectorInputField{
-  padding-left: 1rem;
   width: 16rem;
+  height: 2.5rem;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-radius: 6px;
+  @apply
+    border-solid
+    border-2
+    border-neutral1;
+}
+
+.pmonSelectorInputField:focus{
+  @apply 
+  outline-none
+  border-solid
+  border-2
+  border-neutral5;
 }
 
 .errorMessage{
