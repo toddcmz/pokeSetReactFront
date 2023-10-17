@@ -64,10 +64,26 @@ export default function GameSummary({setGameStatus,
 
   return (
     <div className="gameSummaryContainer">
-      <h3>Final Score: {lastGameScore}</h3>
-      <h3>Total Sets Found: {setsFound}</h3>
-      <h3>Minus penalty checks used: {penaltyChecksUsed}</h3>
-      <h3>Minus 0.5 times the number of sets already present when dealing extra rows: {addRowPenalty} x 0.5 = {addRowPenalty * 0.5}</h3>
+      <table className="tableScoreSummary">
+        <tbody>
+          <tr className="tableRowSetsFound">
+            <td>Total Sets Found</td> 
+            <td className="tableScore"><strong>{setsFound}</strong></td>
+          </tr>
+          <tr className="tableRowPenalty">
+            <td>Penalty checks used</td> 
+            <td className="tableScore">-{penaltyChecksUsed}</td>
+          </tr>
+          <tr className="tableRowPenalty">
+            <td>Additional row penalties</td> 
+            <td className="tableScore">-{addRowPenalty * 0.5}</td>
+          </tr>
+          <tr>
+            <td><strong>Final Score</strong></td> 
+            <td className="tableScore"><strong>{lastGameScore}</strong></td>
+          </tr>
+        </tbody>
+      </table>
       <button className="allAppButtons" onClick={handleSubmitScore}>Submit Score</button>
       <button className="allAppButtons" onClick={handleStartOver}>Start Over</button>
     </div>

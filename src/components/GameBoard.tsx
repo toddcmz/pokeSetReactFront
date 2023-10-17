@@ -39,7 +39,7 @@ export default function GameBoard({
   //const base_api_url = import.meta.env.VITE_APP_BASE_API
 
   // use state to show status of selections
-  const [foundSetStatus, setFoundSetStatus] = useState<string>('Awaiting game start')
+  const [foundSetStatus, setFoundSetStatus] = useState<string>('New game started')
 
   // this will hold the cards the user clicks on while playing
   const [userSelections, setUserSelections] = useState<Card[]>([])

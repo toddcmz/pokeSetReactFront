@@ -364,6 +364,19 @@ margin: .3rem .3rem .3rem .3rem;
   justify-content: space-evenly;
 }
 
+.tableScoreSummary{
+  width: 85%;
+  height: 15rem;
+}
+
+.tableRowSetsFound{
+  @apply text-success3;
+}
+
+.tableRowPenalty{
+  @apply text-error4;
+}
+
 /* High Scores Page */
 .scoresContainer{
   display: flex;
