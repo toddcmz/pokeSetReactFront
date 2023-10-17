@@ -157,6 +157,14 @@ export default function GameBoard({
     }
   }, [deckPointer])
 
+  // temporary 2 minute game timer until I can figure out
+  // a better countdown method
+  useEffect(() => {
+    setTimeout(()=>{
+      handleEndGame()
+    },120000)
+  },[])
+
   function selectingCards(selectedCard: Card): void {
     // clicking a card multiple times would remove it from selections
     if (!userSelections.includes(selectedCard)) {
@@ -241,10 +249,15 @@ export default function GameBoard({
           <h3><strong>{`Total Score: ${setsFound - penaltyChecksUsed - (addRowPenalty * 0.5)}`}</strong></h3>
           <button className="allAppButtons duringPlayButtons" onClick={handleEndGame}>End Game Now</button>
         </div>
-        <div className="gameBoardContainer">
-          {boardCards.map(eachCard => (
-            <CardSlot key={eachCard.cardId} eachCard={eachCard} imgUrls={imgUrls} handleClick={selectingCards} userSelections={userSelections} />
-          ))}
+        <div className="rightGameContainer">
+          <div className="timerContainer">
+            <h3>Find as many sets as you can in 2 minutes!</h3>
+          </div>
+          <div className="gameBoardContainer">
+            {boardCards.map(eachCard => (
+              <CardSlot key={eachCard.cardId} eachCard={eachCard} imgUrls={imgUrls} handleClick={selectingCards} userSelections={userSelections} />
+            ))}
+          </div>
         </div>
       </div>
     </>

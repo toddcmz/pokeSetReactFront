@@ -303,6 +303,12 @@ width: 12rem;
   margin-top: .25rem;
 }
 
+.timerContainer{
+  margin: auto;
+  width: fit-content;
+  padding: 0.75rem;
+}
+
 .gameBoardContainer{
   height: 34.375rem;
   width: 37.5rem;
