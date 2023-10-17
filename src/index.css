@@ -12,7 +12,7 @@ body{
   @apply bg-neutral1;
 }
 
-h1, h2, h3, h5, p{
+h1, h2, h3, h5, p, tr{
   @apply text-neutral5;
 }
 
@@ -24,8 +24,10 @@ h2{
   @apply text-2xl;
 }
 
-input{
-margin: 1rem;
+i{
+  @apply 
+    text-sm
+    text-error4;
 }
 
 .spriteTest{
@@ -54,19 +56,37 @@ margin: 1rem;
 .headerContainer{
   height: 4rem;
   width: 100%;
-  padding: 0.75rem;
   align-items: center;
   @apply 
     bg-primary3
     text-neutral1;
 }
 
-.navButton{
-  margin-right: 1rem;
-  height: 2rem;
-  width: 8rem;
+.pageTitle{
+  margin-left: 0.75rem;
+  padding: 0.25rem .5rem .25rem .5rem;
   text-align: center;
-  @apply text-neutral1;
+  @apply 
+    text-neutral1
+    border-primary3
+    border-2
+    border-solid;
+}
+
+.playingAsContainer > h3{
+  text-align: center;
+  @apply text-primary1;
+}
+
+.navButton{
+  margin-right: 0.5rem;
+  padding: 0.25rem .75rem .25rem .75rem;
+  text-align: center;
+  @apply 
+    text-neutral1
+    border-primary3
+    border-2
+    border-solid;
 }
 
 .navButton:hover{
@@ -75,6 +95,10 @@ margin: 1rem;
     border-solid 
     border-2
     rounded-lg;
+}
+
+.logoutButton:hover{
+  cursor: pointer;
 }
 
 .flexMeRow{
@@ -86,6 +110,53 @@ margin: 1rem;
 .flexMeColumn{
   display: flex;
   flex-direction: column;
+}
+
+/* Registration and Sign in Forms */
+
+.registerForm, .signInForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.registerFormField, .signInFormField{
+  width: 16rem;
+  height: 2.5rem;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-radius: 6px;
+  @apply
+    border-solid
+    border-2
+    border-neutral1;
+}
+
+.signInFormField{
+  margin-bottom: 1.5rem;
+}
+
+.registerFormField:focus, .signInFormField:focus{
+  @apply 
+    outline-none
+    border-solid
+    border-2
+    border-neutral5;
+}
+
+.registerFormSubmitButton, .signInFormSubmitButton{
+margin: 1.5rem auto;
+width: 12rem;
+}
+
+
+
+.inputErrorContainer, .signInErrorContainer{
+  height: 1.5rem;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 /* pokemon selectors */
@@ -114,6 +185,7 @@ margin: 1rem;
 
 .catchEmButton{
   width: 12.5rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -135,8 +207,23 @@ margin: 1rem;
 }
 
 .pmonSelectorInputField{
-  padding-left: 1rem;
   width: 16rem;
+  height: 2.5rem;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-radius: 6px;
+  @apply
+    border-solid
+    border-2
+    border-neutral1;
+}
+
+.pmonSelectorInputField:focus{
+  @apply 
+  outline-none
+  border-solid
+  border-2
+  border-neutral5;
 }
 
 .errorMessage{
@@ -232,6 +319,12 @@ margin: 1rem;
   margin-top: .25rem;
 }
 
+.timerContainer{
+  margin: auto;
+  width: fit-content;
+  padding: 0.75rem;
+}
+
 .gameBoardContainer{
   height: 34.375rem;
   width: 37.5rem;
@@ -260,3 +353,53 @@ margin: .3rem .3rem .3rem .3rem;
   margin: .3rem .3rem .3rem .3rem;
   @apply bg-neutral4;
 }
+
+/* Game summary page */
+.gameSummaryContainer{
+  width: 20rem;
+  height: 35rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.tableScoreSummary{
+  width: 85%;
+  height: 15rem;
+}
+
+.tableRowSetsFound{
+  @apply text-success3;
+}
+
+.tableRowPenalty{
+  @apply text-error4;
+}
+
+/* High Scores Page */
+.scoresContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: auto;
+  width: 25rem;
+}
+
+.allScoresContainer, .userScoresContainer{
+  width: 50%;
+}
+
+table{
+  table-layout: fixed;
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tableScore{
+  text-align: right;
+}
+
